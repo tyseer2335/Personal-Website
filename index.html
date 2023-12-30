@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="output.css">
+    <title>Tyseer Toufiq</title> 
+    <script src="https://kit.fontawesome.com/53c2a19087.js" crossorigin="anonymous"></script>
+    <script src="script.js" defer></script>
+</head>
+
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="#Home">Home</a></li>
+                <li><a href="#About">About</a></li>
+                <li><a href="#Portfolio">Portfolio</a></li>
+                <li><a href="#Resume">Resume</a></li>
+                <li><a href="#Contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="Home" class="parallax white-section" data-parallax-speed="1.0">
+        <video autoplay muted loop id="video-background">
+            <source src="./assets/video.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <div class="layer main-page" data-parallax-speed="1.0">
+            <h1>I'm Tyseer</h1>
+            <h2>A CS Student @ U of T</h2>
+            <h3>Scroll Down To See More!</h3>
+        </div>
+    </section>
+
+    <section class="parallax black-section" data-parallax-speed="1.0">
+        <div class="layer section2" data-parallax-speed="1.0">
+            <p><a class="custom-hover-text" target="_blank" href="https://github.com/tyseer2335/Sketchbook-Animator">Cool Background?<br>Click Here to Create your Own!</a></p>
+        </div>
+    </section>
+
+    <div class="spacer layer2"></div>
+
+    <section id="About" class="parallax white-section" data-parallax-speed="1.0">
+        <div class="layer about-page" data-parallax-speed="1.0">
+            <h1 class="about-heading">About Me</h1>
+            <h2 class="about-text">I am currently in my second year at the University of Toronto St George, pursuing a Major in Computer Science and a Double Minor
+                in Mathematics and Statistics. I'm interested in technologies such as Blockchain, AI, and Augmented Reality as I aspire to work
+                with and develop these exciting technologies after graduation. Outside of academics, I enjoy reading, working out, and playing
+                Football (Soccer). I love to learn new things, even outside of the classroom, and aspire to become multilingual and travel the
+                world one day! Feel free to scroll to the end of this website to contact me, or check what I have been up to on my portfolio.</h2>
+        </div>
+    </section>
+
+    <div class="spacer layer3"></div>
+
+    <section id="Portfolio" class="parallax black-section" data-parallax-speed="1.0">
+        <div class="layer" data-parallax-speed="1.0">
+            <h2 class="portfolio-heading">Portfolio</h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 portfolo-title">
+                <div>
+                    <h3 class="text-2xl font-bold mb-4 text-left project-title-left custom-hover-text">
+                        <p>
+                            <a href="https://github.com/tyseer2335/World-Language-Graph" target="_blank">
+                                World Language Graph
+                            </a>
+                        </p>
+
+                    </h3>
+
+                    <p class="text-white text-left project-desc-left">
+                        World-Language-Graph-3D takes data from
+                        <a class="custom-hover-text" href="https://www.kaggle.com/datasets/rtatman/world-atlas-of-language-structures" target="_blank">World Atlas of Language Structures Dataset (Kaggle)</a>
+                        and
+                        <a class="custom-hover-text" href="https://www.kaggle.com/datasets/rtatman/atlas-of-pidgin-and-creole-language-structures" target="_blank">Atlas of Pidgin and Creole Language Structures (Kaggle)</a>
+                        and combines them into a
+                        <a class="custom-hover-text" href="https://en.wikipedia.org/wiki/Graph_(abstract_data_type)" target="_blank">Graph Abstract Data Type</a>,
+                        and various graph searching algorithms are applied to generate 3D visuals on how the languages interconnect with each other.
+                    </p>
+                    <p class="text-white text-left project-desc-left space">
+                        In the demo to the right a spanning tree algorithm is applied to generate all the Languages that branched off the Germanic language family.
+                        Feel free to click around and play with the interactive demo (You may need to zoom out to see the Graph) Note that this is just
+                        a small section of the entire Language Graph, which can be viewed by clicking
+                        <a class="custom-hover-text underline" href="https://tyseer2335.github.io/World-Language-Graph/" target="_blank">here</a>
+                    </p>
+
+
+                </div>
+                <div>
+                    <div class="relative" style="width: 100%; padding-bottom: 56.25%;">
+                        <iframe class="absolute top-0 left-0 w-full h-full" style="width: 100%; height: 100%;" src="./assets/demo1.html" title="Demo" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="" class="parallax black-section" data-parallax-speed="1.0">
+        <div class="layer" data-parallax-speed="1.0">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 portfolo-title reversed">
+                <div class="right-side">
+                    <div class="relative" style="width: 100%; padding-bottom: 56.25%;">
+                        <img
+                            class="absolute top-0 left-0 w-full h-full"
+                            style="width: 100%; height: 100%; object-fit: cover;"
+                            src="./assets/demo2.png"
+                            alt="Gameplay"
+                        />
+                    </div>
+                </div>
+                <div class="left-side">
+                    <h3 class="text-2xl font-bold mb-4 text-left project-title-left custom-hover-text">
+                        <a href="https://github.com/tyseer2335/PokemonBattleSimulator" target="_blank">
+                            Pokémon Battle Simulator
+                        </a>
+                    </h3>
+                    <p class="text-white text-left project-desc-left">
+                        This Pokémon Battle Simulator allows players to engage in exciting turn-based battles using various Pokémon.  
+                        The simulator is designed to provide a realistic and engaging Pokémon battle experience, complete with different moves,  
+                        strategies, and outcomes.
+                    </p> 
+                    <p class="text-white text-left project-desc-left space">
+                        This project was developed using the 
+                        <a class="custom-hover-text" href="https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html" target="_blank">Clean Architecture </a> principles for a maintainable and scalable design. 
+                        The architecture is structured into layers and emphasizes separating out concerns. More information about how we leveraged Clean Architecture and several design 
+                        decisions while making this project can be found by clicking <a class="custom-hover-text underline" href="https://docs.google.com/presentation/d/1PDqGYWZ6Y_l8xoNbyR7SroA73VyJT5V9e_9OKkr4S9A/edit" target="_blank">here</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <style>
+        @media screen and (max-width: 768px) {
+            .portfolo-title.reversed {
+                flex-direction: column;
+            }
+    
+            .right-side {
+                order: 2;
+            }
+    
+            .left-side {
+                order: 1;
+            }
+        }
+    </style>
+    
+    <section id="" class="parallax black-section" data-parallax-speed="1.0">
+        <div class="layer" data-parallax-speed="1.0">
+    
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 portfolo-title">
+                <div>
+                    <h3 class="text-2xl font-bold mb-4 text-left project-title-left custom-hover-text">
+                        <p>
+                            <a href="https://devpost.com/software/linkup-96m7x1" target="_blank">
+                                LinkUp
+                            </a>
+                        </p>
+
+                    </h3>
+
+                    <p class="text-white text-left project-desc-left"> 
+                        LinkUp is a browser based game that allows users to walk their character in a  
+                        virtual office environment. Users can join various video meeting rooms by moving  
+                        their virtual avatar into a room in game, and connect to a live chat with other players  
+                        in the game. This starts a voice and video call on the Link Up website.
+                    </p>
+                </div>
+                <div>
+                    <div class="relative" style="width: 100%; padding-bottom: 56.25%;">
+                        <iframe  
+                        class="absolute top-0 left-0 w-full h-full"  
+                        style="width: 100%; height: 100%;" src="https://www.youtube.com/embed/MG7pGJezW0g"  
+                        title="Demo" 
+                        frameborder="0" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                        allowfullscreen>
+                    </iframe>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section> 
+    <section id="" class="parallax black-section" data-parallax-speed="1.0">
+        <div class="layer" data-parallax-speed="1.0">
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 portfolo-title reversed">
+                <div class="right-side">
+                    <div class="relative" style="width: 100%; padding-bottom: 56.25%;">
+                        <img
+                        class="absolute top-0 left-0 w-full h-full"
+                        style="width: 100%; height: 100%; object-fit: cover;"
+                        src="./assets/demo4.jpg"
+                        alt="Gameplay"
+                    />
+                    </div>
+                </div>
+                <div class="left-side">
+                    <h3 class="text-2xl font-bold mb-4 text-left project-title-left custom-hover-text">
+                        <a href="https://github.com/tyseer2335/GameJam2020-WON-AWARD-" target="_blank">
+                            Tales of Nuiryn
+                        </a>
+                    </h3>
+                    <p class="text-white text-left project-desc-left">
+                        Tales of Nuiryn is an epic story-driven 3D-action role-playing game. 
+                        You embark on your journey to save a small village with your excellent 
+                        swordsmanship and magic skills. You must fight your way through the ghosts 
+                        in the forest to retrieve the hidden gem to save the village. Tales of Nuiryn 
+                        was awarded the “Most Magical” prize at the University of Waterloo’s 2020 Game Jam.
+                    </p> 
+                </div>
+            </div>
+        </div>
+    </section> 
+    <section id="" class="parallax black-section" data-parallax-speed="1.0">
+        <div class="layer" data-parallax-speed="1.0">
+            <div class="content-container">
+                <h1 class="github">View More</h1>
+                <div class="icons-container">
+                    <a href="https://github.com/tyseer2335" target="_blank">
+                        <i class="fab fa-github fa-7x"></i>
+                    </a>
+                    <a href="https://devpost.com/tyseer2334" target="_blank">
+                        <i class="fas fa-code fa-7x"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    
+
+    <div class="spacer layer4"></div>
+
+    <section id="Resume" class="parallax white-section" data-parallax-speed="1.0">
+        <div class="layer" data-parallax-speed="1.0"> 
+            <div class="content-container">
+                <h1 class="resume">My Resume</h1>
+                <div class="icons-container">
+                    <a href="https://drive.google.com/file/d/1avGL0wwqh0RlS8d1d6s6i46VBm2vyCsM/view?usp=sharing" target="_blank">
+                        <i class="fa-solid fa-paperclip fa-7x"></i>
+                    </a>
+                    <a href="https://www.linkedin.com/in/tyseer-toufiq-a3b8b11aa/" target="_blank">
+                        <i class="fa-brands fa-linkedin-in fa-7x"></i> 
+                    </a>
+                </div>
+            </div>
+            
+        </div>
+    </section>
+
+    <div class="spacer layer5"></div>
+
+    <section id="Contact" class="parallax black-section" data-parallax-speed="1.0">
+        <div class="layer" data-parallax-speed="1.0"> 
+            <div class="content-container">
+                <h1 class="contact">Contact Me</h1>    
+                <h2 class="subheading">tyseer.toufiq@mail.utoronto.ca</h2>       
+                <h2 class="subheading">tyseer2334@gmail.com</h2>
+        </div>
+    </section>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
