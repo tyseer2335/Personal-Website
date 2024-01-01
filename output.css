@@ -1006,6 +1006,10 @@ section {
   background-image: url('./assets/layer5.svg');
 }
 
+.layer6 {
+  background-image: url('./assets/layer6.svg');
+}
+
 a {
   text-decoration: none;
   color: inherit;
@@ -1049,6 +1053,14 @@ a {
   padding-top: 150px;
 }
 
+.custom-hover-text2 {
+  color: black;   
+  transition: color 0.3s ease; 
+}
+
+.custom-hover-text2:hover {
+  color: #61677A; 
+}
 
 .custom-hover-text {
   color: white;   
@@ -1136,4 +1148,9 @@ iframe {
 .subheading { 
   font-family: 'Poppins', sans-serif; 
   font-size: 25px;
-} 
+}  
+
+.subheading2 { 
+  font-family: 'Poppins', sans-serif; 
+  font-size: 32px;
+}
