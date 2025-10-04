@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - main
-  workflow_dispatch:
 
 permissions:
   contents: read
@@ -27,18 +26,16 @@ jobs:
         with:
           node-version: '20'
 
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: latest
+
       - name: Install dependencies
-        run: npm ci
+        run: bun install
 
       - name: Build
-        run: npm run build
-
-      - name: List dist contents (debug)
-        run: |
-          echo "Contents of dist folder:"
-          ls -la dist/
-          echo "First 20 lines of dist/index.html:"
-          head -20 dist/index.html
+        run: bun run build
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
