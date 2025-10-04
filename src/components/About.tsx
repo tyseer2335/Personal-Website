@@ -22,7 +22,7 @@ const About = () => {
         </h1>
         <h2 className="font-poppins text-base sm:text-lg md:text-lg lg:text-xl xl:text-2xl font-[300] text-black pt-8 md:pt-12 lg:pt-16 px-4 sm:px-8 md:px-16 lg:px-20 m-0 max-w-6xl mx-auto">
           I am currently in my third year at the University of Toronto St George, studying Computer Science, Mathematics
-          and Statistics. Outside of academics, I enjoy reading, working out, and playing
+          and Statistics. During Summer & Fall 2025 ill be working as a Software Developer intern @ Royal Bank of Canada (8 Months). Outside of academics, I enjoy reading, working out, and playing
           Football (Soccer). I love to learn new things, even outside of the classroom, and aspire to become multilingual and travel the
           world one day! Feel free to scroll to the end of this website to contact me, or check what I have been up to on my portfolio.
         </h2>

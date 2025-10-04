@@ -31,7 +31,7 @@ const Hero = () => {
           I'm Tyseer
         </h1>
         <h2 className="font-poppins text-2xl sm:text-3xl md:text-2xl lg:text-3xl font-[150] m-0 text-foreground px-4 mt-2 text-reveal-delay-1">
-          A CS Student @ U of T
+          A Student @ U of T
         </h2>
         <h3 className="font-poppins text-base sm:text-lg md:text-lg lg:text-xl font-[200] m-0 text-foreground px-4 mt-2 text-reveal-delay-2">
           Scroll Down To See More!
