@@ -1,0 +1,694 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Projects · Tyseer Toufiq</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="styles/site.css" />
+
+  <style>
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); }
+
+    /* ----- Bands ----- */
+    .band {
+      position: relative;
+      width: 100%;
+    }
+    .band-light {
+      background: var(--bg);
+      color: var(--fg);
+    }
+    .band-dark {
+      background: oklch(0.14 0.005 80);
+      color: oklch(0.97 0.005 80);
+      --fg: oklch(0.97 0.005 80);
+      --muted: oklch(0.66 0.005 80);
+      --muted-2: oklch(0.5 0.005 80);
+      --line: oklch(0.28 0.005 80);
+      --line-strong: oklch(0.4 0.005 80);
+      --bg: oklch(0.14 0.005 80);
+      --bg-elev: oklch(0.2 0.005 80);
+    }
+
+    /* ----- Wavy dividers ----- */
+    .wave {
+      position: absolute;
+      left: 0;
+      width: 100%;
+      height: 36px;
+      display: block;
+      pointer-events: none;
+      z-index: 2;
+    }
+    .wave-top    { top: -35px; }
+    .wave-bottom { bottom: -35px; }
+    .wave path { fill: oklch(0.14 0.005 80); }
+
+    /* ----- Page head ----- */
+    .page-head {
+      padding: clamp(80px, 12vh, 140px) 0 clamp(80px, 12vh, 140px);
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 0.85fr);
+      gap: clamp(28px, 6vw, 96px);
+      align-items: end;
+    }
+    .page-head .lede { margin: 0; color: var(--muted); }
+
+    @media (max-width: 820px) {
+      .page-head { grid-template-columns: 1fr; gap: 24px; }
+    }
+
+
+
+    /* ---- Projects grid ---- */
+    .projects-wrap {
+      padding: clamp(48px, 8vh, 96px) 0;
+    }
+    .projects {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 0;
+      border-top: 1px solid var(--line);
+      border-left: 1px solid var(--line);
+    }
+    .project, .project-ghost {
+      border-right: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+    .project {
+      background: var(--bg);
+      padding: 28px 24px 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      position: relative;
+      transition: background .25s ease;
+    }
+    .project:hover { background: var(--bg-elev); }
+    .project:hover .project-thumb .placeholder { border-color: var(--line-strong); }
+
+    .project-ghost {
+      background: var(--bg);
+      padding: 28px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      min-height: 200px;
+      color: var(--muted);
+    }
+    .project-ghost .ghost-inner {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+    .project-ghost .ghost-mark {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: 1px dashed var(--line-strong);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--ff-mono);
+      font-size: 18px;
+      color: var(--muted);
+      animation: ghostPulse 3s ease-in-out infinite;
+    }
+    @keyframes ghostPulse {
+      0%, 100% { transform: scale(1); opacity: 0.85; }
+      50%      { transform: scale(1.08); opacity: 1; }
+    }
+    .project-ghost .ghost-label {
+      font-family: var(--ff-mono);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+    }
+
+    /* Project links (replaces Read more) */
+    .project-links {
+      margin-top: auto;
+      padding-top: 12px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    .proj-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 10px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      font-family: var(--ff-mono);
+      font-size: 11px;
+      color: var(--fg);
+      background: var(--bg);
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+      transition: background .2s ease, color .2s ease, border-color .2s ease, transform .2s ease;
+    }
+    .proj-link:hover {
+      background: var(--fg);
+      color: var(--bg);
+      border-color: var(--fg);
+      transform: translateY(-1px);
+    }
+    .proj-link svg { width: 13px; height: 13px; flex-shrink: 0; }
+
+    .project-thumb {
+      aspect-ratio: 16 / 10;
+      width: 100%;
+      position: relative;
+      border-radius: 8px;
+      overflow: hidden;
+      background: #03001C;
+    }
+    .project-thumb .placeholder {
+      position: absolute; inset: 0;
+      transition: border-color .25s ease;
+      border-radius: 0;
+    }
+    .project-thumb img {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .project-thumb iframe {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      border: 0;
+      display: block;
+      pointer-events: none;
+    }
+    .project-meta {
+      font-family: var(--ff-mono);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .project-meta .year { color: var(--fg); }
+    .project-meta .dot {
+      width: 3px; height: 3px; border-radius: 50%;
+      background: var(--line-strong);
+    }
+    .project-title {
+      font-size: 22px;
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+      font-weight: 500;
+      margin: 0;
+      text-wrap: balance;
+    }
+    .project-blurb {
+      font-size: 14px;
+      line-height: 1.55;
+      color: var(--muted);
+      margin: 0;
+      text-wrap: pretty;
+    }
+    .project-tags .chip {
+      display: inline-block;
+      padding: 3px 9px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      font-family: var(--ff-mono);
+      font-size: 10.5px;
+      color: var(--muted);
+      letter-spacing: 0;
+    }
+
+    .award {
+      position: absolute;
+      top: 28px;
+      right: 24px;
+      font-family: var(--ff-mono);
+      font-size: 10.5px;
+      color: var(--fg);
+      background: var(--bg);
+      border: 1px solid var(--line-strong);
+      padding: 4px 9px;
+      border-radius: 999px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      z-index: 2;
+    }
+
+    @media (max-width: 1040px) {
+      .projects { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+    @media (max-width: 640px) {
+      .projects { grid-template-columns: 1fr; }
+    }
+
+    /* CTA */
+    .cta {
+      padding: clamp(80px, 12vh, 140px) 0 clamp(48px, 6vh, 72px);
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      align-items: end;
+      gap: 32px;
+    }
+    .cta h2 {
+      font-size: clamp(28px, 3.4vw, 40px);
+      letter-spacing: -0.025em;
+      margin: 0;
+      font-weight: 500;
+      text-wrap: balance;
+      color: var(--fg);
+    }
+    .cta .button {
+      display: inline-flex; align-items: center; gap: 10px;
+      padding: 14px 22px;
+      border: 1px solid var(--fg);
+      border-radius: 999px;
+      background: var(--fg);
+      color: var(--bg);
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: -0.01em;
+      transition: transform .2s ease, background .2s ease;
+    }
+    .cta .button:hover { transform: translateY(-1px); }
+    @media (max-width: 720px) {
+      .cta { grid-template-columns: 1fr; align-items: start; }
+    }
+
+    /* footer in dark band */
+    .band .foot {
+      border-top: 1px solid var(--line);
+      margin-top: 0;
+    }
+    .band-dark .foot,
+    .band-dark .foot .mono {
+      color: #fff;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ===== Nav ===== -->
+  <header class="nav">
+    <div class="container nav-inner">
+      <a class="nav-brand" href="index.html">Tyseer Toufiq</a>
+      <nav>
+        <ul class="nav-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="Experience.html">Experience</a></li>
+          <li><a href="Projects.html" class="active">Projects</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main data-screen-label="03 Projects">
+
+    <!-- ===== Page head (dark) ===== -->
+    <section class="band band-dark">
+      <div class="container">
+        <div class="page-head">
+          <div>
+            <h1 class="h2">Things I've Designed,<br/>Built, and Broken</h1>
+          </div>
+          <p class="lede">
+            Hackathon wins, course projects and personal experiments. Most live on
+            GitHub, a few have been blessed with awards from people I respect.
+          </p>
+        </div>
+      </div>
+      <svg class="wave wave-bottom" viewBox="0 0 1200 36" preserveAspectRatio="none" aria-hidden="true">
+        <path d="M0,0 L1200,0 L1200,18 Q1050,36 900,18 T600,18 T300,18 T0,18 Z"/>
+      </svg>
+    </section>
+
+    <!-- ===== Projects grid (light) ===== -->
+    <section class="band band-light">
+      <div class="container projects-wrap">
+        <div class="projects" aria-label="Projects">
+          <!-- 1. Money Laundering Detection -->
+          <article class="project">
+            <div class="award">Scotia BD + AI '26</div>
+            <div class="project-thumb">
+              <img src="assets/projects/money-laundering-anomalies.png" alt="" />
+            </div>
+            <div class="project-meta">
+              <span class="year">2026</span><span class="dot"></span><span>ML · Banking</span>
+            </div>
+            <h3 class="project-title">Money Laundering Detection</h3>
+            <p class="project-blurb">
+              Our team's submission to the Scotiabank UofT Big Data &amp; AI Competition. A two-stage anti-money-laundering pipeline scoring 61,410 customers with 90% recall by combining unsupervised anomaly detection with FINTRAC and FinCEN derived domain rules.
+            </p>
+            <div class="project-tags">
+              <span class="chip">Python</span>
+              <span class="chip">Scikit-learn</span>
+              <span class="chip">Isolation Forests</span>
+              <span class="chip">XGBoost</span>
+            </div>
+            <div class="project-links">
+              <a class="proj-link" href="https://github.com/YehyunLee/big-data-ai-2026" target="_blank" rel="noopener" aria-label="GitHub">
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5a11.5 11.5 0 0 0-3.63 22.41c.57.1.78-.25.78-.55v-2c-3.2.7-3.87-1.37-3.87-1.37-.52-1.32-1.27-1.67-1.27-1.67-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.02 1.75 2.69 1.24 3.34.95.1-.74.4-1.25.72-1.54-2.55-.29-5.24-1.28-5.24-5.7 0-1.26.45-2.29 1.18-3.1-.12-.29-.51-1.46.11-3.04 0 0 .96-.31 3.16 1.18a10.97 10.97 0 0 1 5.75 0c2.2-1.49 3.16-1.18 3.16-1.18.62 1.58.23 2.75.11 3.04.74.81 1.18 1.84 1.18 3.1 0 4.44-2.7 5.4-5.27 5.69.41.36.78 1.06.78 2.14v3.17c0 .31.21.66.79.55A11.5 11.5 0 0 0 12 .5Z"/></svg>
+                GitHub
+              </a>
+              <a class="proj-link" href="https://docs.google.com/presentation/d/17DxOmzHhx5pHLwMQKOPZTAnIDJAemJhm_HiZOXeEQig/edit?usp=sharing" target="_blank" rel="noopener" aria-label="Slideshow">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="12" rx="1.5"/><path d="M8 20h8"/><path d="M12 16v4"/></svg>
+                Slideshow
+              </a>
+              <a class="proj-link" href="https://money-laundering-detection.netlify.app/" target="_blank" rel="noopener" aria-label="Live site">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg>
+                Live
+              </a>
+            </div>
+          </article>
+
+          <!-- 2. Senior Care Canada -->
+          <article class="project">
+            <div class="project-thumb">
+              <img src="assets/projects/senior-care-ages.png" alt="" />
+            </div>
+            <div class="project-meta">
+              <span class="year">2026</span><span class="dot"></span><span>Data storytelling</span>
+            </div>
+            <h3 class="project-title">Senior Care Canada</h3>
+            <p class="project-blurb">
+              An interactive data story exploring how demographics shape access to nursing and residential care across six Canadian cities.
+            </p>
+            <div class="project-tags">
+              <span class="chip">R Markdown</span>
+              <span class="chip">Tailwind</span>
+              <span class="chip">JavaScript</span>
+              <span class="chip">Real World Data</span>
+            </div>
+            <div class="project-links">
+              <a class="proj-link" href="https://github.com/tyseer2335/senior-care-canada" target="_blank" rel="noopener" aria-label="GitHub">
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5a11.5 11.5 0 0 0-3.63 22.41c.57.1.78-.25.78-.55v-2c-3.2.7-3.87-1.37-3.87-1.37-.52-1.32-1.27-1.67-1.27-1.67-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.02 1.75 2.69 1.24 3.34.95.1-.74.4-1.25.72-1.54-2.55-.29-5.24-1.28-5.24-5.7 0-1.26.45-2.29 1.18-3.1-.12-.29-.51-1.46.11-3.04 0 0 .96-.31 3.16 1.18a10.97 10.97 0 0 1 5.75 0c2.2-1.49 3.16-1.18 3.16-1.18.62 1.58.23 2.75.11 3.04.74.81 1.18 1.84 1.18 3.1 0 4.44-2.7 5.4-5.27 5.69.41.36.78 1.06.78 2.14v3.17c0 .31.21.66.79.55A11.5 11.5 0 0 0 12 .5Z"/></svg>
+                GitHub
+              </a>
+              <a class="proj-link" href="https://tyseer2335.github.io/senior-care-canada/" target="_blank" rel="noopener" aria-label="Live">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg>
+                Live
+              </a>
+            </div>
+          </article>
+
+          <!-- 3. The Happiness Paradox -->
+          <article class="project">
+            <div class="project-thumb">
+              <img src="assets/projects/happiness-paradox.png" alt="" />
+            </div>
+            <div class="project-meta">
+              <span class="year">2026</span><span class="dot"></span><span>Data analysis</span>
+            </div>
+            <h3 class="project-title">The Happiness Paradox</h3>
+            <p class="project-blurb">
+              An exploratory data analysis of 1,000+ simulated city residents from VAST Challenge 2022, asking whether more money actually buys more happiness.
+            </p>
+            <div class="project-tags">
+              <span class="chip">R</span>
+              <span class="chip">R Markdown</span>
+              <span class="chip">ggplot2</span>
+            </div>
+            <div class="project-links">
+              <a class="proj-link" href="https://github.com/tyseer2335/The-Happiness-Paradox" target="_blank" rel="noopener" aria-label="GitHub">
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5a11.5 11.5 0 0 0-3.63 22.41c.57.1.78-.25.78-.55v-2c-3.2.7-3.87-1.37-3.87-1.37-.52-1.32-1.27-1.67-1.27-1.67-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.02 1.75 2.69 1.24 3.34.95.1-.74.4-1.25.72-1.54-2.55-.29-5.24-1.28-5.24-5.7 0-1.26.45-2.29 1.18-3.1-.12-.29-.51-1.46.11-3.04 0 0 .96-.31 3.16 1.18a10.97 10.97 0 0 1 5.75 0c2.2-1.49 3.16-1.18 3.16-1.18.62 1.58.23 2.75.11 3.04.74.81 1.18 1.84 1.18 3.1 0 4.44-2.7 5.4-5.27 5.69.41.36.78 1.06.78 2.14v3.17c0 .31.21.66.79.55A11.5 11.5 0 0 0 12 .5Z"/></svg>
+                GitHub
+              </a>
+              <a class="proj-link" href="https://tyseer2335.github.io/The-Happiness-Paradox/" target="_blank" rel="noopener" aria-label="Live">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg>
+                Live
+              </a>
+            </div>
+          </article>
+
+          <!-- 4. SpectraSphere -->
+          <article class="project">
+            <div class="award">HTN '25 Winner</div>
+            <div class="project-thumb">
+              <img src="assets/projects/spectrasphere-demo.gif" alt="" />
+            </div>
+            <div class="project-meta">
+              <span class="year">2025</span><span class="dot"></span><span>AR · Spectacles</span>
+            </div>
+            <h3 class="project-title">SpectraSphere</h3>
+            <p class="project-blurb">
+              Winner of the Snapchat Prize at Hack the North 2025. Turns a handful of trip photos into a five-panel themed storyboard you can step into on Snap Spectacles AR.
+            </p>
+            <div class="project-tags">
+              <span class="chip">Lens Studio</span>
+              <span class="chip">Cohere</span>
+              <span class="chip">Gemini</span>
+              <span class="chip">AR</span>
+              <span class="chip">Express.js</span>
+            </div>
+            <div class="project-links">
+              <a class="proj-link" href="https://github.com/tyseer2335/SpectraSphere" target="_blank" rel="noopener" aria-label="GitHub">
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5a11.5 11.5 0 0 0-3.63 22.41c.57.1.78-.25.78-.55v-2c-3.2.7-3.87-1.37-3.87-1.37-.52-1.32-1.27-1.67-1.27-1.67-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.02 1.75 2.69 1.24 3.34.95.1-.74.4-1.25.72-1.54-2.55-.29-5.24-1.28-5.24-5.7 0-1.26.45-2.29 1.18-3.1-.12-.29-.51-1.46.11-3.04 0 0 .96-.31 3.16 1.18a10.97 10.97 0 0 1 5.75 0c2.2-1.49 3.16-1.18 3.16-1.18.62 1.58.23 2.75.11 3.04.74.81 1.18 1.84 1.18 3.1 0 4.44-2.7 5.4-5.27 5.69.41.36.78 1.06.78 2.14v3.17c0 .31.21.66.79.55A11.5 11.5 0 0 0 12 .5Z"/></svg>
+                GitHub
+              </a>
+              <a class="proj-link" href="https://devpost.com/software/htn-zq6138" target="_blank" rel="noopener" aria-label="Devpost">
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.78 1.5 0 12l6.78 10.5h10.44L24 12 17.22 1.5H6.78Zm3.78 5.18h3.42c2.86 0 4.95 2.05 4.95 5.33s-2.07 5.33-4.95 5.33h-3.42V6.68Zm2.24 2.13v6.4h.95c1.7 0 2.78-1.05 2.78-3.2 0-2.16-1.06-3.2-2.78-3.2h-.95Z"/></svg>
+                Devpost
+              </a>
+            </div>
+          </article>
+
+          <!-- 5. Pokémon Battle Simulator -->
+          <article class="project">
+            <div class="project-thumb">
+              <img src="assets/projects/pokemon-battle.png" alt="" />
+            </div>
+            <div class="project-meta">
+              <span class="year">2024</span><span class="dot"></span><span>Java · Game</span>
+            </div>
+            <h3 class="project-title">Pokémon Battle Simulator</h3>
+            <p class="project-blurb">
+              Turn-based Pokémon battler simulator written in Java. Allows players to engage in exciting battles using various Pokémon. The simulator is designed to provide a realistic and engaging Pokémon battle experience, complete with different moves, strategies, and outcomes.
+            </p>
+            <div class="project-tags">
+              <span class="chip">Java</span>
+            </div>
+            <div class="project-links">
+              <a class="proj-link" href="https://github.com/tyseer2335/PokemonBattleSimulator" target="_blank" rel="noopener" aria-label="GitHub">
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5a11.5 11.5 0 0 0-3.63 22.41c.57.1.78-.25.78-.55v-2c-3.2.7-3.87-1.37-3.87-1.37-.52-1.32-1.27-1.67-1.27-1.67-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.02 1.75 2.69 1.24 3.34.95.1-.74.4-1.25.72-1.54-2.55-.29-5.24-1.28-5.24-5.7 0-1.26.45-2.29 1.18-3.1-.12-.29-.51-1.46.11-3.04 0 0 .96-.31 3.16 1.18a10.97 10.97 0 0 1 5.75 0c2.2-1.49 3.16-1.18 3.16-1.18.62 1.58.23 2.75.11 3.04.74.81 1.18 1.84 1.18 3.1 0 4.44-2.7 5.4-5.27 5.69.41.36.78 1.06.78 2.14v3.17c0 .31.21.66.79.55A11.5 11.5 0 0 0 12 .5Z"/></svg>
+                GitHub
+              </a>
+              <a class="proj-link" href="https://docs.google.com/presentation/d/1PDqGYWZ6Y_l8xoNbyR7SroA73VyJT5V9e_9OKkr4S9A/edit?slide=id.g2a1ca9691ec_20_4#slide=id.g2a1ca9691ec_20_4" target="_blank" rel="noopener" aria-label="Slideshow">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="12" rx="1.5"/><path d="M8 20h8"/><path d="M12 16v4"/></svg>
+                Slideshow
+              </a>
+            </div>
+          </article>
+
+          <!-- 6. ForecastAI -->
+          <article class="project">
+            <div class="project-thumb">
+              <img src="assets/projects/forecastai-bias.png" alt="" />
+            </div>
+            <div class="project-meta">
+              <span class="year">2024</span><span class="dot"></span><span>AI · Research</span>
+            </div>
+            <h3 class="project-title">ForecastAI</h3>
+            <p class="project-blurb">
+              A collaboration with U of T's Machine Learning Group. Researchers can ask forecasting questions, the system gathers relevant data, runs it through a custom model, and visualizes the cognitive biases baked into the answer.
+            </p>
+            <div class="project-tags">
+              <span class="chip">FastAPI</span>
+              <span class="chip">Firebase</span>
+              <span class="chip">React</span>
+              <span class="chip">GPT</span>
+              <span class="chip">Research</span>
+            </div>
+            <div class="project-links">
+              <a class="proj-link" href="https://github.com/tyseer2335/forecast-ai" target="_blank" rel="noopener" aria-label="GitHub">
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5a11.5 11.5 0 0 0-3.63 22.41c.57.1.78-.25.78-.55v-2c-3.2.7-3.87-1.37-3.87-1.37-.52-1.32-1.27-1.67-1.27-1.67-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.02 1.75 2.69 1.24 3.34.95.1-.74.4-1.25.72-1.54-2.55-.29-5.24-1.28-5.24-5.7 0-1.26.45-2.29 1.18-3.1-.12-.29-.51-1.46.11-3.04 0 0 .96-.31 3.16 1.18a10.97 10.97 0 0 1 5.75 0c2.2-1.49 3.16-1.18 3.16-1.18.62 1.58.23 2.75.11 3.04.74.81 1.18 1.84 1.18 3.1 0 4.44-2.7 5.4-5.27 5.69.41.36.78 1.06.78 2.14v3.17c0 .31.21.66.79.55A11.5 11.5 0 0 0 12 .5Z"/></svg>
+                GitHub
+              </a>
+              <a class="proj-link" href="https://forecastai.netlify.app/signup" target="_blank" rel="noopener" aria-label="Live">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg>
+                Live
+              </a>
+            </div>
+          </article>
+
+          <!-- 7. Tetris in MIPS -->
+          <article class="project">
+            <div class="project-thumb">
+              <img src="assets/projects/tetris-mips.png" alt="" style="object-position: center bottom;" />
+            </div>
+            <div class="project-meta">
+              <span class="year">2024</span><span class="dot"></span><span>Assembly · Game</span>
+            </div>
+            <h3 class="project-title">Tetris in MIPS</h3>
+            <p class="project-blurb">
+              Tetris implemented from scratch in MIPS assembly language, rendered to a bitmap display in the Saturn IDE. Rotation, line clears, pause, the whole thing, with zero abstractions between me and the registers.
+            </p>
+            <div class="project-tags">
+              <span class="chip">MIPS Assembly</span>
+              <span class="chip">Low Level</span>
+            </div>
+            <div class="project-links">
+              <a class="proj-link" href="https://github.com/tyseer2335/Tetris-MIPS" target="_blank" rel="noopener" aria-label="GitHub">
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5a11.5 11.5 0 0 0-3.63 22.41c.57.1.78-.25.78-.55v-2c-3.2.7-3.87-1.37-3.87-1.37-.52-1.32-1.27-1.67-1.27-1.67-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.02 1.75 2.69 1.24 3.34.95.1-.74.4-1.25.72-1.54-2.55-.29-5.24-1.28-5.24-5.7 0-1.26.45-2.29 1.18-3.1-.12-.29-.51-1.46.11-3.04 0 0 .96-.31 3.16 1.18a10.97 10.97 0 0 1 5.75 0c2.2-1.49 3.16-1.18 3.16-1.18.62 1.58.23 2.75.11 3.04.74.81 1.18 1.84 1.18 3.1 0 4.44-2.7 5.4-5.27 5.69.41.36.78 1.06.78 2.14v3.17c0 .31.21.66.79.55A11.5 11.5 0 0 0 12 .5Z"/></svg>
+                GitHub
+              </a>
+            </div>
+          </article>
+
+          <!-- 8. World Language Graph -->
+          <article class="project">
+            <div class="project-thumb">
+              <img src="assets/projects/world-language-graph.png" alt="" />
+            </div>
+            <div class="project-meta">
+              <span class="year">2023</span><span class="dot"></span><span>Data viz</span>
+            </div>
+            <h3 class="project-title">World Language Graph</h3>
+            <p class="project-blurb">
+              A 3D interactive graph of the world's languages, built from two Kaggle linguistics atlases. Spanning-tree and traversal algorithms surface how language families branch, drift and intersect across continents.
+            </p>
+            <div class="project-tags">
+              <span class="chip">Python</span>
+              <span class="chip">Pyvis</span>
+            </div>
+            <div class="project-links">
+              <a class="proj-link" href="https://github.com/tyseer2335/World-Language-Graph" target="_blank" rel="noopener" aria-label="GitHub">
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5a11.5 11.5 0 0 0-3.63 22.41c.57.1.78-.25.78-.55v-2c-3.2.7-3.87-1.37-3.87-1.37-.52-1.32-1.27-1.67-1.27-1.67-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.02 1.75 2.69 1.24 3.34.95.1-.74.4-1.25.72-1.54-2.55-.29-5.24-1.28-5.24-5.7 0-1.26.45-2.29 1.18-3.1-.12-.29-.51-1.46.11-3.04 0 0 .96-.31 3.16 1.18a10.97 10.97 0 0 1 5.75 0c2.2-1.49 3.16-1.18 3.16-1.18.62 1.58.23 2.75.11 3.04.74.81 1.18 1.84 1.18 3.1 0 4.44-2.7 5.4-5.27 5.69.41.36.78 1.06.78 2.14v3.17c0 .31.21.66.79.55A11.5 11.5 0 0 0 12 .5Z"/></svg>
+                GitHub
+              </a>
+              <a class="proj-link" href="https://tyseer2335.github.io/World-Language-Graph/" target="_blank" rel="noopener" aria-label="Live">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg>
+                Live
+              </a>
+            </div>
+          </article>
+
+          <!-- 9. LinkUp -->
+          <article class="project">
+            <div class="project-thumb">
+              <img src="assets/projects/linkup.png" alt="" />
+            </div>
+            <div class="project-meta">
+              <span class="year">2022</span><span class="dot"></span><span>Hackathon</span>
+            </div>
+            <h3 class="project-title">LinkUp</h3>
+            <p class="project-blurb">
+              A browser-based virtual office where you walk an avatar between rooms. Stepping into a room drops you into a live voice and video call with everyone else inside, no Zoom link required.
+            </p>
+            <div class="project-tags">
+              <span class="chip">Unity</span>
+              <span class="chip">WebSockets</span>
+              <span class="chip">Express.js</span>
+            </div>
+            <div class="project-links">
+              <a class="proj-link" href="https://github.com/tyseer2335/LinkUp" target="_blank" rel="noopener" aria-label="GitHub">
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5a11.5 11.5 0 0 0-3.63 22.41c.57.1.78-.25.78-.55v-2c-3.2.7-3.87-1.37-3.87-1.37-.52-1.32-1.27-1.67-1.27-1.67-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.02 1.75 2.69 1.24 3.34.95.1-.74.4-1.25.72-1.54-2.55-.29-5.24-1.28-5.24-5.7 0-1.26.45-2.29 1.18-3.1-.12-.29-.51-1.46.11-3.04 0 0 .96-.31 3.16 1.18a10.97 10.97 0 0 1 5.75 0c2.2-1.49 3.16-1.18 3.16-1.18.62 1.58.23 2.75.11 3.04.74.81 1.18 1.84 1.18 3.1 0 4.44-2.7 5.4-5.27 5.69.41.36.78 1.06.78 2.14v3.17c0 .31.21.66.79.55A11.5 11.5 0 0 0 12 .5Z"/></svg>
+                GitHub
+              </a>
+              <a class="proj-link" href="https://devpost.com/software/linkup-96m7x1" target="_blank" rel="noopener" aria-label="Devpost">
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.78 1.5 0 12l6.78 10.5h10.44L24 12 17.22 1.5H6.78Zm3.78 5.18h3.42c2.86 0 4.95 2.05 4.95 5.33s-2.07 5.33-4.95 5.33h-3.42V6.68Zm2.24 2.13v6.4h.95c1.7 0 2.78-1.05 2.78-3.2 0-2.16-1.06-3.2-2.78-3.2h-.95Z"/></svg>
+                Devpost
+              </a>
+            </div>
+          </article>
+
+          <!-- 10. World Weather iOS -->
+          <article class="project">
+            <div class="project-thumb">
+              <img src="assets/projects/world-weather-ios.png" alt="" style="object-position: center top;" />
+            </div>
+            <div class="project-meta">
+              <span class="year">2022</span><span class="dot"></span><span>iOS · Mobile</span>
+            </div>
+            <h3 class="project-title">World Weather iOS</h3>
+            <p class="project-blurb">
+              An iOS weather app pulling live conditions from the OpenWeather API for any of 200,000+ cities, plus GPS-based local weather. Built around MVC and the Delegation pattern as a first proper Swift project.
+            </p>
+            <div class="project-tags">
+              <span class="chip">Swift</span>
+              <span class="chip">UIKit</span>
+              <span class="chip">MVC</span>
+            </div>
+            <div class="project-links">
+              <a class="proj-link" href="https://github.com/tyseer2335/World-Weather-IOS" target="_blank" rel="noopener" aria-label="GitHub">
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5a11.5 11.5 0 0 0-3.63 22.41c.57.1.78-.25.78-.55v-2c-3.2.7-3.87-1.37-3.87-1.37-.52-1.32-1.27-1.67-1.27-1.67-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.02 1.75 2.69 1.24 3.34.95.1-.74.4-1.25.72-1.54-2.55-.29-5.24-1.28-5.24-5.7 0-1.26.45-2.29 1.18-3.1-.12-.29-.51-1.46.11-3.04 0 0 .96-.31 3.16 1.18a10.97 10.97 0 0 1 5.75 0c2.2-1.49 3.16-1.18 3.16-1.18.62 1.58.23 2.75.11 3.04.74.81 1.18 1.84 1.18 3.1 0 4.44-2.7 5.4-5.27 5.69.41.36.78 1.06.78 2.14v3.17c0 .31.21.66.79.55A11.5 11.5 0 0 0 12 .5Z"/></svg>
+                GitHub
+              </a>
+            </div>
+          </article>
+
+          <!-- 11. Sketchbook Animator -->
+          <article class="project">
+            <div class="project-thumb">
+              <img src="assets/projects/sketchbook-animator.png" alt="" />
+            </div>
+            <div class="project-meta">
+              <span class="year">2021</span><span class="dot"></span><span>Creative tool</span>
+            </div>
+            <h3 class="project-title">Sketchbook Animator</h3>
+            <p class="project-blurb">
+              A lightweight tool for hand-drawn frame-by-frame animation, the same one used to generate the wavy sketch animation playing in the background of this site. Onion-skinning, brush tools, and export to looping video.
+            </p>
+            <div class="project-tags">
+              <span class="chip">NumPy</span>
+              <span class="chip">OpenCV</span>
+              <span class="chip">Python</span>
+            </div>
+            <div class="project-links">
+              <a class="proj-link" href="https://github.com/tyseer2335/Sketchbook-Animator" target="_blank" rel="noopener" aria-label="GitHub">
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5a11.5 11.5 0 0 0-3.63 22.41c.57.1.78-.25.78-.55v-2c-3.2.7-3.87-1.37-3.87-1.37-.52-1.32-1.27-1.67-1.27-1.67-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.02 1.75 2.69 1.24 3.34.95.1-.74.4-1.25.72-1.54-2.55-.29-5.24-1.28-5.24-5.7 0-1.26.45-2.29 1.18-3.1-.12-.29-.51-1.46.11-3.04 0 0 .96-.31 3.16 1.18a10.97 10.97 0 0 1 5.75 0c2.2-1.49 3.16-1.18 3.16-1.18.62 1.58.23 2.75.11 3.04.74.81 1.18 1.84 1.18 3.1 0 4.44-2.7 5.4-5.27 5.69.41.36.78 1.06.78 2.14v3.17c0 .31.21.66.79.55A11.5 11.5 0 0 0 12 .5Z"/></svg>
+                GitHub
+              </a>
+            </div>
+          </article>
+
+          <!-- Ghost / coming soon -->
+          <div class="project-ghost" aria-hidden="true">
+            <div class="ghost-inner">
+              <div class="ghost-mark">+</div>
+              <span class="ghost-label">More on the way</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- ===== CTA + Footer (dark) ===== -->
+    <section class="band band-dark">
+      <svg class="wave wave-top" viewBox="0 0 1200 36" preserveAspectRatio="none" aria-hidden="true">
+        <path d="M0,18 Q150,0 300,18 T600,18 T900,18 T1200,18 L1200,36 L0,36 Z"/>
+      </svg>
+      <div class="container">
+        <section class="cta">
+          <h2>Want to see what I'm building next?</h2>
+          <a class="button" href="https://github.com/tyseer2335" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="M12 .5a11.5 11.5 0 0 0-3.63 22.41c.57.1.78-.25.78-.55v-2c-3.2.7-3.87-1.37-3.87-1.37-.52-1.32-1.27-1.67-1.27-1.67-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.02 1.75 2.69 1.24 3.34.95.1-.74.4-1.25.72-1.54-2.55-.29-5.24-1.28-5.24-5.7 0-1.26.45-2.29 1.18-3.1-.12-.29-.51-1.46.11-3.04 0 0 .96-.31 3.16 1.18a10.97 10.97 0 0 1 5.75 0c2.2-1.49 3.16-1.18 3.16-1.18.62 1.58.23 2.75.11 3.04.74.81 1.18 1.84 1.18 3.1 0 4.44-2.7 5.4-5.27 5.69.41.36.78 1.06.78 2.14v3.17c0 .31.21.66.79.55A11.5 11.5 0 0 0 12 .5Z"/></svg>
+            Follow on GitHub
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M7 17 17 7"/><path d="M8 7h9v9"/>
+            </svg>
+          </a>
+        </section>
+
+        <footer class="foot">
+          <span class="mono">© 2026 Tyseer Toufiq</span>
+        </footer>
+      </div>
+    </section>
+
+  </main>
+
+</body>
+</html>

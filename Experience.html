@@ -1,0 +1,524 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Experience · Tyseer Toufiq</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="styles/site.css" />
+
+  <style>
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); }
+
+    /* ----- Bands (full-bleed alternating bg) ----- */
+    .band {
+      position: relative;
+      width: 100%;
+    }
+    .band-light {
+      background: var(--bg);
+      color: var(--fg);
+    }
+    .band-dark {
+      background: oklch(0.14 0.005 80);
+      color: oklch(0.97 0.005 80);
+      --fg: oklch(0.97 0.005 80);
+      --muted: oklch(0.66 0.005 80);
+      --muted-2: oklch(0.5 0.005 80);
+      --line: oklch(0.28 0.005 80);
+      --line-strong: oklch(0.4 0.005 80);
+      --bg: oklch(0.14 0.005 80);
+      --bg-elev: oklch(0.2 0.005 80);
+    }
+
+    /* ----- Wavy dividers on dark bands ----- */
+    .wave {
+      position: absolute;
+      left: 0;
+      width: 100%;
+      height: 36px;
+      display: block;
+      pointer-events: none;
+      z-index: 2;
+    }
+    .wave-top    { top: -35px; }
+    .wave-bottom { bottom: -35px; }
+    .wave path { fill: oklch(0.14 0.005 80); }
+
+    /* ----- Page head ----- */
+    .page-head {
+      padding: clamp(80px, 12vh, 140px) 0 clamp(80px, 12vh, 140px);
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 0.85fr);
+      gap: clamp(28px, 6vw, 96px);
+      align-items: end;
+    }
+    .page-head .lede { margin: 0; color: var(--muted); }
+
+    @media (max-width: 820px) {
+      .page-head { grid-template-columns: 1fr; gap: 24px; }
+    }
+
+    /* ----- Side nav (aymanam.tech-inspired) ----- */
+    .side-nav {
+      position: fixed;
+      top: 50%;
+      right: clamp(16px, 2vw, 28px);
+      transform: translateY(-50%);
+      z-index: 30;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      padding: 4px 0;
+      mix-blend-mode: difference;
+    }
+    .side-nav a {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 10px;
+      font-family: var(--ff-mono);
+      font-size: 11px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: #888;
+      padding: 4px 0;
+      transition: color .2s ease;
+    }
+    .side-nav a .label { white-space: nowrap; transition: color .2s ease; }
+    .side-nav a .tick {
+      display: inline-block;
+      width: 10px;
+      height: 1px;
+      background: #888;
+      transition: width .25s ease, height .25s ease, background .25s ease;
+      flex-shrink: 0;
+    }
+    .side-nav a:hover { color: #fff; }
+    .side-nav a:hover .tick { width: 16px; background: #fff; }
+    .side-nav a.active { color: #fff; }
+    .side-nav a.active .tick { width: 22px; height: 1.5px; background: #fff; }
+
+    @media (max-width: 1280px) { .side-nav { display: none; } }
+
+    /* ----- Role / entry ----- */
+    .role {
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+      gap: clamp(28px, 5vw, 80px);
+      padding: clamp(80px, 11vw, 128px) 0;
+      scroll-margin-top: 80px;
+    }
+
+    .role-head {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 24px;
+    }
+    .role-logo {
+      width: 44px; height: 44px;
+      border-radius: 10px;
+      background: var(--bg-elev);
+      border: 1px solid var(--line);
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--ff-mono);
+      font-size: 16px;
+      font-weight: 500;
+      color: var(--fg);
+      flex-shrink: 0;
+      overflow: hidden;
+    }
+    .role-logo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .role-co {
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--fg);
+      letter-spacing: -0.01em;
+    }
+    .role-co .industry {
+      display: block;
+      font-size: 12px;
+      color: var(--muted);
+      font-weight: 400;
+      letter-spacing: 0;
+      margin-top: 2px;
+      font-family: var(--ff-mono);
+    }
+    .role-when {
+      margin-left: auto;
+      font-family: var(--ff-mono);
+      font-size: 12px;
+      color: var(--muted);
+      text-align: right;
+      white-space: nowrap;
+    }
+    .role-title {
+      font-size: clamp(28px, 3.4vw, 40px);
+      line-height: 1.1;
+      letter-spacing: -0.025em;
+      font-weight: 500;
+      margin: 0 0 8px;
+      text-wrap: balance;
+      color: var(--fg);
+    }
+    .role-tagline {
+      font-size: 16px;
+      color: var(--fg);
+      margin: 0 0 28px;
+      max-width: 56ch;
+      line-height: 1.55;
+    }
+    .role-tagline a {
+      color: var(--fg);
+      border-bottom: 1px solid var(--line-strong);
+      transition: border-color .2s ease;
+    }
+    .role-tagline a:hover { border-bottom-color: var(--fg); }
+    .role-bullets { list-style: none; margin: 0; padding: 0; }
+    .role-bullets li {
+      position: relative;
+      padding-left: 22px;
+      font-size: 15px;
+      line-height: 1.55;
+      color: var(--fg);
+      margin-bottom: 12px;
+      text-wrap: pretty;
+      max-width: 56ch;
+    }
+    .role-bullets li::before {
+      content: "";
+      position: absolute;
+      left: 0; top: 0.65em;
+      width: 8px; height: 1px;
+      background: var(--line-strong);
+    }
+    .role-stack { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 24px; }
+    .chip {
+      display: inline-block;
+      padding: 4px 10px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      font-family: var(--ff-mono);
+      font-size: 11px;
+      color: var(--muted);
+      letter-spacing: -0.01em;
+    }
+
+    /* image column */
+    .role-media {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 200px 140px;
+      gap: 12px;
+    }
+    .role-media .placeholder:nth-child(1) { grid-column: 1 / -1; }
+    .role-media .placeholder:nth-child(2) { grid-column: 1 / 2; }
+    .role-media .placeholder:nth-child(3) { grid-column: 2 / 3; }
+    .role-media.single {
+      grid-template-columns: 1fr;
+      grid-template-rows: 340px;
+    }
+    .role-media.single .placeholder { grid-column: 1 / -1; }
+
+    /* Real-image tile (used the same grid positions as .placeholder) */
+    .role-media .tile {
+      position: relative;
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      background: var(--bg-elev);
+    }
+    .role-media .tile:nth-child(1) { grid-column: 1 / -1; }
+    .role-media .tile:nth-child(2) { grid-column: 1 / 2; }
+    .role-media .tile:nth-child(3) { grid-column: 2 / 3; }
+    .role-media .tile img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* placeholders on dark bands */
+    .band-dark .placeholder {
+      background:
+        repeating-linear-gradient(
+          135deg,
+          oklch(0.22 0.005 80) 0,
+          oklch(0.22 0.005 80) 10px,
+          oklch(0.18 0.005 80) 10px,
+          oklch(0.18 0.005 80) 20px
+        );
+      border-color: var(--line);
+    }
+    .band-dark .placeholder .label {
+      background: var(--bg);
+      color: var(--muted);
+      border-color: var(--line);
+    }
+
+    @media (max-width: 900px) {
+      .role { grid-template-columns: 1fr; gap: 32px; }
+      .role-media { grid-template-rows: 180px 130px; }
+    }
+
+    /* ---- Studies card variation: degree details ---- */
+    .study-meta {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0;
+      margin-top: 8px;
+      border-top: 1px solid var(--line);
+    }
+    .study-meta .row {
+      display: grid;
+      grid-template-columns: 120px 1fr;
+      gap: 16px;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--line);
+      font-size: 14px;
+    }
+    .study-meta .row .k {
+      font-family: var(--ff-mono);
+      color: var(--muted);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      padding-top: 3px;
+    }
+    .study-meta .row .v { color: var(--fg); }
+
+    /* footer in dark band */
+    .band .foot {
+      border-top: 1px solid var(--line);
+      margin-top: 0;
+    }
+    .band-dark .foot,
+    .band-dark .foot .mono {
+      color: #fff;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== Nav ===== -->
+  <header class="nav">
+    <div class="container nav-inner">
+      <a class="nav-brand" href="index.html">Tyseer Toufiq</a>
+      <nav>
+        <ul class="nav-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="Experience.html" class="active">Experience</a></li>
+          <li><a href="Projects.html">Projects</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ===== Side nav ===== -->
+  <aside class="side-nav" aria-label="Section navigation">
+    <a href="#amazon" data-target="amazon"><span class="label">Amazon</span><span class="tick"></span></a>
+    <a href="#rbc" data-target="rbc"><span class="label">RBC</span><span class="tick"></span></a>
+    <a href="#education" data-target="education"><span class="label">Education</span><span class="tick"></span></a>
+  </aside>
+
+  <main data-screen-label="02 Experience">
+
+    <!-- ===== Page head (dark) ===== -->
+    <section class="band band-dark">
+      <div class="container">
+        <div class="page-head">
+          <div>
+            <h1 class="h2">My professional<br/>journey</h1>
+          </div>
+          <p class="lede">
+            A running log of internships, shipping real software, working with
+            sharp people, and learning what I don't know yet
+          </p>
+        </div>
+      </div>
+      <svg class="wave wave-bottom" viewBox="0 0 1200 36" preserveAspectRatio="none" aria-hidden="true">
+        <path d="M0,0 L1200,0 L1200,18 Q1050,36 900,18 T600,18 T300,18 T0,18 Z"/>
+      </svg>
+    </section>
+
+    <!-- ===== Amazon (light) ===== -->
+    <section class="band band-light" id="amazon">
+      <div class="container">
+        <article class="role">
+          <div class="role-text">
+            <div class="role-head">
+              <div class="role-logo" aria-hidden="true">
+                <img src="assets/images/amazon-logo.jpg" alt="" />
+              </div>
+              <div class="role-co">
+                Amazon Web Services
+                <span class="industry">Messaging Queues</span>
+              </div>
+              <div class="role-when">June 2026 – August 2026</div>
+            </div>
+
+            <h2 class="role-title">Software Development Engineer Intern</h2>
+            <p class="role-tagline">
+              Incoming summer 2026 intern supporting managed message broker
+              services used by enterprise customers across AWS.
+            </p>
+
+            <div class="role-stack" aria-label="Stack">
+              <span class="chip">AWS</span>
+              <span class="chip">ActiveMQ</span>
+              <span class="chip">RabbitMQ</span>
+            </div>
+          </div>
+
+          <div class="role-media" aria-hidden="true">
+            <div class="tile"><img src="assets/images/amazon-the-post-lego.webp" alt="" /></div>
+            <div class="tile"><img src="assets/images/amazon-neon.png" alt="" /></div>
+            <div class="tile"><img src="assets/images/amazon-yvr-office.jpg" alt="" /></div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ===== RBC (dark) ===== -->
+    <section class="band band-dark" id="rbc">
+      <svg class="wave wave-top" viewBox="0 0 1200 36" preserveAspectRatio="none" aria-hidden="true">
+        <path d="M0,18 Q150,0 300,18 T600,18 T900,18 T1200,18 L1200,36 L0,36 Z"/>
+      </svg>
+      <div class="container">
+        <article class="role">
+          <div class="role-text">
+            <div class="role-head">
+              <div class="role-logo" aria-hidden="true">
+                <img src="assets/images/rbc-logo.webp" alt="" />
+              </div>
+              <div class="role-co">
+                Royal Bank of Canada
+                <span class="industry">Platform Engineering</span>
+              </div>
+              <div class="role-when">May 2025 – Dec 2025</div>
+            </div>
+
+            <h2 class="role-title">Software Developer Intern</h2>
+            <p class="role-tagline">
+              Platform team engineer focused on CI/CD pipelines, DevOps tooling,
+              and developer experience. Maintained core infrastructure supporting
+              enterprise banking applications.
+            </p>
+
+            <div class="role-stack" aria-label="Stack">
+              <span class="chip">Docker</span>
+              <span class="chip">Kubernetes</span>
+              <span class="chip">GitHub Actions</span>
+              <span class="chip">OpenShift</span>
+              <span class="chip">TypeScript</span>
+            </div>
+          </div>
+
+          <div class="role-media" aria-hidden="true">
+            <div class="tile"><img src="assets/images/rbc-island-day.jpg" alt="" /></div>
+            <div class="tile"><img src="assets/images/rbc-window-view.jpg" alt="" /></div>
+            <div class="tile"><img src="assets/images/rbc-coop-event.jpg" alt="" /></div>
+          </div>
+        </article>
+      </div>
+      <svg class="wave wave-bottom" viewBox="0 0 1200 36" preserveAspectRatio="none" aria-hidden="true">
+        <path d="M0,0 L1200,0 L1200,18 Q1050,36 900,18 T600,18 T300,18 T0,18 Z"/>
+      </svg>
+    </section>
+
+    <!-- ===== Studies (light) ===== -->
+    <section class="band band-light" id="education">
+      <div class="container">
+        <article class="role">
+          <div class="role-text">
+            <div class="role-head">
+              <div class="role-logo" aria-hidden="true">
+                <img src="assets/images/uoft-logo-crest.png" alt="" />
+              </div>
+              <div class="role-co">
+                University of Toronto, St. George
+                <span class="industry">Undergraduate</span>
+              </div>
+            </div>
+
+            <h2 class="role-title">Honours Bachelor of Science</h2>
+            <p class="role-tagline">
+              U of T is consistently ranked in the
+              <a href="https://www.topuniversities.com/university-subject-rankings/computer-science-information-systems" target="_blank" rel="noopener">top 15 universities worldwide for Computer Science</a>,
+              home to Turing-award-winning AI research, the birthplace of
+              modern deep learning, and one of the most rigorous CS programs
+              in North America. I'm currently a 4th year undergrad majoring
+              in Computer Science, minoring in Mathematics and Statistics.
+            </p>
+
+            <div class="study-meta">
+              <div class="row"><span class="k">Major</span><span class="v">Computer Science</span></div>
+              <div class="row"><span class="k">Minors</span><span class="v">Mathematics &amp; Statistics</span></div>
+            </div>
+          </div>
+
+          <div class="role-media" aria-hidden="true">
+            <div class="tile"><img src="assets/images/uoft-front-campus.jpg" alt="" /></div>
+            <div class="tile"><img src="assets/images/uoft-tower.jpg" alt="" /></div>
+            <div class="tile"><img src="assets/images/uoft-lecture.jpg" alt="" /></div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ===== Footer (dark) ===== -->
+    <section class="band band-dark">
+      <svg class="wave wave-top" viewBox="0 0 1200 36" preserveAspectRatio="none" aria-hidden="true">
+        <path d="M0,18 Q150,0 300,18 T600,18 T900,18 T1200,18 L1200,36 L0,36 Z"/>
+      </svg>
+      <div class="container">
+        <footer class="foot">
+          <span class="mono">© 2026 Tyseer Toufiq</span>
+        </footer>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    // Side-nav active state on scroll
+    (function () {
+      const ids = ['amazon', 'rbc', 'education'];
+      const links = document.querySelectorAll('.side-nav a');
+      const linkMap = new Map();
+      links.forEach(a => linkMap.set(a.dataset.target, a));
+
+      const observer = new IntersectionObserver((entries) => {
+        const visible = entries
+          .filter(e => e.isIntersecting)
+          .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
+        if (visible.length === 0) return;
+        links.forEach(a => a.classList.remove('active'));
+        const id = visible[0].target.id;
+        const link = linkMap.get(id);
+        if (link) link.classList.add('active');
+      }, {
+        rootMargin: '-30% 0px -55% 0px',
+        threshold: 0
+      });
+
+      ids.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) observer.observe(el);
+      });
+    })();
+  </script>
+
+</body>
+</html>

@@ -1,35 +1,278 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Tyseer Toufiq - Portfolio</title>
-    <meta name="description" content="Computer Science student at University of Toronto. Software Developer intern @ RBC. Portfolio showcasing projects in full-stack development, 3D graphics, and game development." />
-    <meta name="author" content="Tyseer Toufiq" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Tyseer Toufiq — Student @ U of T</title>
 
-    <meta property="og:title" content="Tyseer Toufiq - Portfolio" />
-    <meta property="og:description" content="Computer Science student at University of Toronto. View my portfolio of web development and software engineering projects." />
-    <meta property="og:type" content="website" />
-    <meta property="og:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
 
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:site" content="@lovable_dev" />
-    <meta name="twitter:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
-  </head>
+  <link rel="stylesheet" href="styles/site.css" />
 
-  <body>
-    <!-- Google Analytics (Optional: Remove if not needed) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-LFKNVG3XZG"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-LFKNVG3XZG');
-    </script>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
+  <style>
+    /* ----- Background video stage ----- */
+    body { background: #fafaf9; }
+
+    .bg-stage {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      overflow: hidden;
+      pointer-events: none;
+    }
+    .bg-stage video {
+      position: absolute;
+      top: 50%; left: 50%;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transform: translate(-50%, -50%);
+      filter: grayscale(100%) contrast(1.1);
+      opacity: 0.95;
+    }
+    /* light wash so dark text stays readable */
+    .bg-stage .wash {
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse at center,
+          oklch(0.985 0.005 80 / 0.18) 0%,
+          oklch(0.985 0.005 80 / 0.42) 60%,
+          oklch(0.985 0.005 80 / 0.62) 100%);
+    }
+
+    /* ----- Wavy decoration (black & white) ----- */
+    .waves {
+      position: absolute;
+      left: 0; right: 0;
+      width: 100%;
+      height: 180px;
+      pointer-events: none;
+      overflow: hidden;
+      opacity: 0.55;
+    }
+    .waves.top { top: 80px; }
+    .waves.bottom { bottom: 40px; transform: scaleY(-1); }
+    .waves svg { width: 100%; height: 100%; display: block; }
+    .waves .wave-line {
+      fill: none;
+      stroke-width: 1;
+      stroke-linecap: round;
+    }
+    .waves .ink { stroke: oklch(0.15 0.005 80); }
+    .waves .ash { stroke: oklch(0.55 0.005 80); }
+    .waves .mist { stroke: oklch(0.78 0.005 80); }
+    .waves .w1 { animation: drift 18s ease-in-out infinite; }
+    .waves .w2 { animation: drift 24s ease-in-out -6s infinite reverse; }
+    .waves .w3 { animation: drift 30s ease-in-out -12s infinite; }
+    @keyframes drift {
+      0%, 100% { transform: translateX(0); }
+      50%      { transform: translateX(-30px); }
+    }
+
+    /* ----- Home-specific ----- */
+    .hero {
+      position: relative;
+      height: calc(100dvh - 64px);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: clamp(24px, 5vh, 64px) 0 clamp(56px, 7vh, 80px);
+    }
+    .hero > * { position: relative; z-index: 1; }
+
+    .hero-foot {
+      position: absolute;
+      left: var(--pad);
+      right: var(--pad);
+      bottom: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      font-family: var(--ff-mono);
+      font-size: 12px;
+      letter-spacing: 0.04em;
+      color: #fff;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.45);
+      z-index: 1;
+    }
+    .hero-foot a {
+      color: #fff;
+      border-bottom: 1px solid rgba(255,255,255,0.35);
+      transition: border-color .2s ease;
+    }
+    .hero-foot a:hover { border-bottom-color: #fff; }
+    .hero-name {
+      margin-top: 0;
+      font-size: clamp(48px, 9vw, 120px);
+    }
+    .hero-name .amp {
+      display: inline-block;
+      font-style: italic;
+      font-weight: 300;
+      opacity: 0.55;
+    }
+    .hero-sub {
+      font-size: clamp(18px, 2.2vw, 26px);
+      line-height: 1.35;
+      letter-spacing: -0.015em;
+      color: var(--fg);
+      font-weight: 400;
+      margin: 18px 0 0;
+      max-width: 38ch;
+      text-wrap: balance;
+    }
+    .hero-sub strong {
+      font-weight: 600;
+      color: var(--fg);
+    }
+    .hero-sub a {
+      color: var(--fg);
+      font-weight: 600;
+      border-bottom: 1px solid color-mix(in oklab, var(--fg) 20%, transparent);
+      transition: border-color .2s ease;
+    }
+    .hero-sub a:hover { border-bottom-color: var(--fg); }
+    .hero-sub .sep {
+      display: inline-block;
+      margin: 0 0.5em;
+      color: var(--muted-2);
+      font-weight: 300;
+    }
+    .about-blurb {
+      margin-top: clamp(36px, 5.5vh, 64px);
+      max-width: 62ch;
+      background: color-mix(in oklab, oklch(0.92 0.005 80) 78%, transparent);
+      backdrop-filter: blur(10px) saturate(140%);
+      -webkit-backdrop-filter: blur(10px) saturate(140%);
+      border: 1px solid color-mix(in oklab, var(--line) 60%, transparent);
+      border-radius: 18px;
+      padding: 24px 30px;
+      box-shadow: 0 1px 0 rgba(255,255,255,0.5) inset, 0 8px 24px -16px rgba(0,0,0,0.18);
+    }
+    .about-blurb p {
+      font-size: clamp(14px, 1.4vw, 16px);
+      line-height: 1.6;
+      color: var(--fg);
+      margin: 0 0 12px;
+      text-wrap: pretty;
+    }
+    .about-blurb p:last-child { margin-bottom: 0; }
+    .about-blurb a {
+      color: var(--fg);
+      border-bottom: 1px solid color-mix(in oklab, var(--fg) 25%, transparent);
+      transition: border-color .2s ease;
+    }
+    .about-blurb a:hover { border-bottom-color: var(--fg); }
+    .about-blurb p:last-child { margin-bottom: 0; }
+    .about-blurb p + p { color: var(--fg); }
+
+    .socials {
+      display: inline-flex;
+      gap: 12px;
+      margin-top: clamp(28px, 4.5vh, 48px);
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      padding: 10px 14px;
+      background: color-mix(in oklab, oklch(0.92 0.005 80) 78%, transparent);
+      backdrop-filter: blur(10px) saturate(140%);
+      -webkit-backdrop-filter: blur(10px) saturate(140%);
+      border: 1px solid color-mix(in oklab, var(--line) 60%, transparent);
+      border-radius: 999px;
+      box-shadow: 0 1px 0 rgba(255,255,255,0.5) inset, 0 8px 24px -16px rgba(0,0,0,0.18);
+    }
+    .icon-link {
+      background: transparent;
+      border: none;
+      width: 32px;
+      height: 32px;
+      padding: 0;
+      border-radius: 50%;
+      transition: transform .2s ease, opacity .2s ease;
+    }
+    .icon-link:hover {
+      transform: translateY(-2px) scale(1.06);
+      background: transparent;
+      color: inherit;
+    }
+    .icon-link img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== Background video + wash ===== -->
+  <div class="bg-stage" aria-hidden="true">
+    <video autoplay muted loop playsinline preload="auto" poster="">
+      <source src="assets/video.mp4" type="video/mp4" />
+    </video>
+  </div>
+
+  <!-- ===== Nav ===== -->
+  <header class="nav" data-screen-label="Nav">
+    <div class="container nav-inner">
+      <a class="nav-brand" href="index.html">Tyseer Toufiq</a>
+      <nav>
+        <ul class="nav-links">
+          <li><a href="index.html" class="active">Home</a></li>
+          <li><a href="Experience.html">Experience</a></li>
+          <li><a href="Projects.html">Projects</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ===== Hero ===== -->
+  <main class="container" data-screen-label="01 Home">
+    <section class="hero">
+
+      <h1 class="h1 hero-name">I'm Tyseer</h1>
+      <p class="hero-sub">CS @ <a href="https://www.utoronto.ca/" target="_blank" rel="noopener">UofT</a><span class="sep">|</span>SDE @ <a href="https://aws.amazon.com/" target="_blank" rel="noopener">AWS</a><span class="sep">|</span>Prev @ <a href="https://www.rbc.com/" target="_blank" rel="noopener">RBC</a></p>
+
+      <div class="about-blurb">
+        <p>
+          I'm currently a fourth year at the University of Toronto, St.&nbsp;George,
+          majoring in Computer Science, and minoring in Mathematics &amp; Statistics.
+          Previously I worked at RBC where I learned about CI/CD, DevOps and platform
+          engineering, and I'm currently working at Amazon supporting managed message
+          broker services used by enterprise customers.
+        </p>
+        <p>
+          Feel free to check out my <a href="Projects.html"><strong>projects</strong></a>
+          or reach out to me through email:
+          tyseer&nbsp;[DOT]&nbsp;toufiq&nbsp;[AT]&nbsp;mail&nbsp;[DOT]&nbsp;utoronto&nbsp;[DOT]&nbsp;ca.
+        </p>
+      </div>
+
+      <div class="socials" aria-label="Social profiles">
+        <a class="icon-link" href="https://github.com/tyseer2335" target="_blank" rel="noopener" aria-label="GitHub">
+          <img src="assets/icons/github.png" alt="" />
+        </a>
+        <a class="icon-link" href="https://www.linkedin.com/in/tyseer-toufiq-a3b8b11aa/" target="_blank" rel="noopener" aria-label="LinkedIn">
+          <img src="assets/icons/linkedin.png" alt="" />
+        </a>
+        <a class="icon-link" href="https://twitter.com/" target="_blank" rel="noopener" aria-label="Twitter / X">
+          <img src="assets/icons/twitter.png" alt="" />
+        </a>
+        <a class="icon-link" href="https://devpost.com/tyseer2334" target="_blank" rel="noopener" aria-label="Devpost">
+          <img src="assets/icons/devpost.svg" alt="" />
+        </a>
+      </div>
+
+      <div class="hero-foot">
+        <span>© 2026 Tyseer Toufiq</span>
+        <span>Background made with <a href="https://github.com/tyseer2335/Sketchbook-Animator" target="_blank" rel="noopener">Sketchbook Animator</a></span>
+      </div>
+    </section>
+  </main>
+
+</body>
 </html>

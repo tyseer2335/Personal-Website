@@ -22,3 +22,6 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Local backup of the new-site export (kept on disk, not deployed)
+new-website.zip
