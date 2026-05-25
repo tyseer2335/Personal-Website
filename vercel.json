@@ -1,5 +1,5 @@
 {
-  "framework": null,
-  "buildCommand": "echo 'Static site - no build step needed'",
-  "outputDirectory": "."
+  "installCommand": "echo 'No install needed for static site'",
+  "buildCommand": "rm -rf dist && mkdir dist && cp -r assets styles index.html Experience.html Projects.html dist/",
+  "outputDirectory": "dist"
 }
